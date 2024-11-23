@@ -45,8 +45,8 @@ class LogConfig:
         root_logger.addHandler(ch)
         root_logger.addHandler(fh)
 
-        # Отключаем логирование от sqlalchemy и aiogram
-        logging.getLogger('sqlalchemy.engine.Engine').disabled = True
-        logging.getLogger('aiogram').setLevel(logging.WARNING)
+        # # Отключаем логирование от sqlalchemy и aiogram
+        # logging.getLogger('sqlalchemy.engine.Engine').disabled = True
+        # logging.getLogger('aiogram').setLevel(logging.WARNING)
 
         return logging.getLogger(__name__)

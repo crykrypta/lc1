@@ -22,6 +22,6 @@ def load_config() -> Config:
     env = Env()
     env.read_env()
     return Config(
-        bot=Bot(api_key=env.str("BOT_TOKEN")),
+        bot=Bot(api_key=env.str("BOT_API_KEY")),
         openai=OpenAI(api_key=env.str("OPENAI_API_KEY"))
     )

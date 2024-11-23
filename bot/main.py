@@ -23,7 +23,7 @@ async def main():
 # Запуск бота
 if __name__ == '__main__':
     try:
+        logger.info('Starting bot..')
         asyncio.run(main())
-        logger.info('Bot started')
     except KeyboardInterrupt:
         logger.info('Bot stopped')

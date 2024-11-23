@@ -1,0 +1,7 @@
+[38;20m[11-23 14:09:36.017] INFO    -       main: 26|<module>                 - Starting bot..[0m
+[38;20m[11-23 14:09:36.017] DEBUG   - selector_events: 64|__init__                 - Using selector: KqueueSelector[0m
+[38;20m[11-23 14:09:36.017] INFO    - dispatcher:527|start_polling            - Start polling[0m
+[38;20m[11-23 14:09:36.289] INFO    - dispatcher:341|_polling                 - Run polling for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
+[33;20m[11-23 14:09:43.604] WARNING - dispatcher:455|_signal_stop_polling     - Received SIGINT signal[0m
+[38;20m[11-23 14:09:43.605] INFO    - dispatcher:359|_polling                 - Polling stopped for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
+[38;20m[11-23 14:09:43.605] INFO    - dispatcher:554|start_polling            - Polling stopped[0m
