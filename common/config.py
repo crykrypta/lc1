@@ -1,15 +1,16 @@
 from dataclasses import dataclass
 from environs import Env
+from pydantic import SecretStr
 
 
 @dataclass
 class Bot:
-    api_key: str
+    api_key: SecretStr
 
 
 @dataclass
 class OpenAI:
-    api_key: str
+    api_key: SecretStr
 
 
 @dataclass
@@ -22,6 +23,10 @@ def load_config() -> Config:
     env = Env()
     env.read_env()
     return Config(
-        bot=Bot(api_key=env.str("BOT_API_KEY")),
-        openai=OpenAI(api_key=env.str("OPENAI_API_KEY"))
+        bot=Bot(
+            api_key=SecretStr(env.str("BOT_API_KEY"))
+        ),
+        openai=OpenAI(
+            api_key=SecretStr(env.str("OPENAI_API_KEY"))
+        )
     )
