@@ -5,7 +5,7 @@ from pydantic import SecretStr
 
 @dataclass
 class Bot:
-    api_key: SecretStr
+    api_key: str
 
 
 @dataclass
@@ -24,7 +24,7 @@ def load_config() -> Config:
     env.read_env()
     return Config(
         bot=Bot(
-            api_key=SecretStr(env.str("BOT_API_KEY"))
+            api_key=env.str("BOT_API_KEY")
         ),
         openai=OpenAI(
             api_key=SecretStr(env.str("OPENAI_API_KEY"))

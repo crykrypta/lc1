@@ -1,7 +1,9 @@
-[38;20m[11-23 14:09:36.017] INFO    -       main: 26|<module>                 - Starting bot..[0m
-[38;20m[11-23 14:09:36.017] DEBUG   - selector_events: 64|__init__                 - Using selector: KqueueSelector[0m
-[38;20m[11-23 14:09:36.017] INFO    - dispatcher:527|start_polling            - Start polling[0m
-[38;20m[11-23 14:09:36.289] INFO    - dispatcher:341|_polling                 - Run polling for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
-[33;20m[11-23 14:09:43.604] WARNING - dispatcher:455|_signal_stop_polling     - Received SIGINT signal[0m
-[38;20m[11-23 14:09:43.605] INFO    - dispatcher:359|_polling                 - Polling stopped for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
-[38;20m[11-23 14:09:43.605] INFO    - dispatcher:554|start_polling            - Polling stopped[0m
+[38;20m[11-23 14:19:34.649] INFO    -       main: 29|<module>                 - Starting bot..[0m
+[38;20m[11-23 14:19:34.649] DEBUG   - selector_events: 64|__init__                 - Using selector: KqueueSelector[0m
+[38;20m[11-23 14:19:34.649] INFO    - dispatcher:527|start_polling            - Start polling[0m
+[38;20m[11-23 14:19:34.946] INFO    - dispatcher:341|_polling                 - Run polling for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
+[38;20m[11-23 14:19:47.653] INFO    - dispatcher:172|feed_update              - Update id=194941357 is handled. Duration 322 ms by bot id=7921568370[0m
+[38;20m[11-23 14:20:05.129] INFO    - dispatcher:172|feed_update              - Update id=194941358 is handled. Duration 294 ms by bot id=7921568370[0m
+[33;20m[11-23 14:40:36.934] WARNING - dispatcher:455|_signal_stop_polling     - Received SIGINT signal[0m
+[38;20m[11-23 14:40:36.937] INFO    - dispatcher:359|_polling                 - Polling stopped for bot @The1ZSignsBot id=7921568370 - 'Zodiak'[0m
+[38;20m[11-23 14:40:36.937] INFO    - dispatcher:554|start_polling            - Polling stopped[0m
