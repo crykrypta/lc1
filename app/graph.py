@@ -1,25 +1,33 @@
+from PIL import Image as PILImage
+import os
 from typing import Annotated
 from typing_extensions import TypedDict
 
+from langchain_openai import ChatOpenAI
+from langchain_community.tools.tavily_search import TavilySearchResults
+
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
+from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.checkpoint.memory import MemorySaver
 
-from langchain_openai import ChatOpenAI
 from common.config import load_config
 
-from PIL import Image as PILImage
-import os
-
 config = load_config()
+
+memory = MemorySaver()
 
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
 
 
+# Создание графа
 graph_builder = StateGraph(State)
 
-llm = ChatOpenAI(model='gpt-3.5-turbo', api_key=config.openai.api_key)
+
+# --Создание модели чат-бота--
+llm = ChatOpenAI(model='gpt-4o-mini', api_key=config.openai.api_key)
 
 
 # Нода чат-бота
@@ -27,12 +35,34 @@ def chatbot(state: State):
     return {'messages': [llm.invoke(state['messages'])]}
 
 
-# Добавление ноды
+# Добавление ноды в граф
 graph_builder.add_node('chatbot', chatbot)
-# Создание связей
+
+
+# --Инструмент TAVILY--
+tool = TavilySearchResults(max_results=2)
+tools = [tool]
+# Создание ноды инструментов
+tool_node = ToolNode(tools=[tool])
+# Добавление ноды в граф
+graph_builder.add_node('tools', tool_node)
+
+
+# --CREATING EDGES--
+
+# Условное ветвление с ноды CHATBOT
+graph_builder.add_conditional_edges(
+    'chatbot',
+    tools_condition,
+    {'tools': 'tools', END: END}
+)
+
+# Ребра
 graph_builder.add_edge(START, 'chatbot')
-graph_builder.add_edge('chatbot', END)
-# Компиляция графа
+graph_builder.add_edge('tools', 'chatbot')
+
+
+# --Компиляция графа--
 graph = graph_builder.compile()
 
 
@@ -40,7 +70,7 @@ graph = graph_builder.compile()
 def stream_graph_updates(user_input: str):
     for event in graph.stream({'messages': [('user', user_input)]}):
         for value in event.values():
-            print('AI: ', value['messages'][-1].content)
+            print('AI: ', value['messages'][-1])
 
 
 # Основной цикл общения с моделью
@@ -51,7 +81,7 @@ while True:
             print("Goodbye!")
             break
 
-        stream_graph_updates(user_input=user_input)  # IMPORTANT
+        stream_graph_updates(user_input=user_input)
 
     except Exception as e:
         print(f"An error occurred: {e}")

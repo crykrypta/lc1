@@ -14,9 +14,15 @@ class OpenAI:
 
 
 @dataclass
+class Tavily:
+    api_key: SecretStr
+
+
+@dataclass
 class Config:
     bot: Bot
     openai: OpenAI
+    tavily: Tavily
 
 
 def load_config() -> Config:
@@ -28,5 +34,8 @@ def load_config() -> Config:
         ),
         openai=OpenAI(
             api_key=SecretStr(env.str("OPENAI_API_KEY"))
+        ),
+        tavily=Tavily(
+            api_key=SecretStr(env.str("TAVILY_API_KEY"))
         )
     )
