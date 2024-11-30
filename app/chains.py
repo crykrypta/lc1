@@ -61,18 +61,21 @@ while True:
     query = input('User: ')
     if query in ['stop', 'exit', 'стоп']:
         break
-
     # Создаем обьект Конфигурации истории диалога
     runnable_config = RunnableConfig(configurable={'session_id': 1})
     # Даем запрос в модель
+    print('AI:', end=' ')
     try:
-        response = chain_with_memory.invoke(
-            {
-                'messages': [HumanMessage(content=query)],
-                'language': 'Russian'
-            },
-            config=runnable_config
-        )
-        print(f'AI: {response.content}')
+        for chunk in chain_with_memory.stream(
+                {
+                    'messages': [HumanMessage(content=query)],
+                    'language': 'Russian'
+                },
+                config=runnable_config
+        ):
+            # print(f'AI: {chunk.content}')
+
+            print(chunk.content, end='', flush=True)
+        print()
     except Exception as e:
         print(f'Ошибка: {e}')
