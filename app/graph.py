@@ -58,8 +58,6 @@ while True:
         break
 
 
-
-
 # Отображение картинки
 try:
     # Ensure the 'pics' directory exists
